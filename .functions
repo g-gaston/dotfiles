@@ -1,0 +1,100 @@
+profzsh() {
+  shell=${1-$SHELL}
+  ZPROF=true $shell -i -c exit
+}
+
+ls() {
+    if [[ $# -ne 0 ]] ; then command ls $@; else tree -I ".DS_Store" -alL 1 ; fi
+}
+
+his() {
+	cat ~/.zhistory | grep "${1}" | sed -E  's/(.*);(.*)/\2/' | egrep --color "${1}"
+}
+
+killgrep() {
+  grep_string=$1
+  ps aux | grep $grep_string | grep -v grep | awk '{print $2}' | xargs kill -9
+}
+
+branch() {
+  git symbolic-ref --short -q HEAD
+}
+
+rp() {
+  current_branch=$(branch)
+  stash_messsage="Temporal stashing for rebase and push at $(date '+%Y-%m-%d %H:%M:%S')"
+  git stash save $stash_messsage && git checkout "${1}" && git fetch origin master:master && git rebase master
+
+  if [ $? -ne 0 ]; then
+    echo "Something went wrong. You'll probably need to:"
+    echo "\t- Return to your original branch ($current_branch)"
+    if git stash list | head -1 | grep -q "$stash_messsage"; then
+      echo "\t- Do an stash pop, look for the message ($stash_messsage)"
+    fi
+    return 1
+  fi
+
+  git push -f -u origin "${1}" && git checkout "${current_branch}"
+
+  #check if our stash message is the first in the stash list, hence we stashed something
+  if git stash list | head -1 | grep -q "$stash_messsage"; then
+      #return to original state
+      git stash pop
+  fi
+}
+
+_rp() {
+  local state
+
+  _arguments \
+    '1: :->branch' \
+
+  case $state in
+    (branch) _arguments "1:branches:($(git for-each-ref refs/heads --format='%(refname:short)'))" ;;
+  esac
+}
+
+compdef _rp rp
+
+unalias gp
+gp() {
+  git push -u origin "$(branch)"
+}
+
+gfp() {
+  git push -f -u origin $(branch)
+}
+
+_reset_with_branch_keep_commits() {
+  branch_for_reset=${1}
+  commits_to_save=${2}
+  last_commit=$(git rev-parse HEAD)
+  oldest_commit_to_keep=$(git rev-parse HEAD~$((${commits_to_save}-1)))
+  current_branch=$(branch)
+  copy_branch="copy-of-${current_branch}"
+  stash_messsage="Temporal stashing for reset_with_master_keep_commit at $(date '+%Y-%m-%d %H:%M:%S')"
+  git stash save --include-untracked $stash_messsage && git branch "${copy_branch}" && git fetch origin "${branch_for_reset}:${branch_for_reset}" && git reset --hard "${branch_for_reset}" && git cherry-pick "${oldest_commit_to_keep}"\^.."${last_commit}"
+
+  if [ $? -ne 0 ]; then
+    echo "Something went wrong. You'll probably need to:"
+    echo "\t- Delete copy branch ($copy_branch)"
+    if git stash list | head -1 | grep -q "$stash_messsage"; then
+      echo "\t- Do an stash pop, look for the message ($stash_messsage)"
+    fi
+    return 1
+  fi
+
+  git branch -D "${copy_branch}"
+
+  #check if our stash message is the first in the stash list, hence we stashed something
+  if git stash list | head -1 | grep -q "$stash_messsage"; then
+      #return to original state
+      git stash pop
+  fi
+}
+
+rmk1() {
+  _reset_with_branch_keep_commits master 1
+}
+
+[[ ! -f ~/.functions_local ]] || source ~/.functions_local
