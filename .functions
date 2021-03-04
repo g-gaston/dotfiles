@@ -56,7 +56,6 @@ _rp() {
 
 compdef _rp rp
 
-unalias gp
 gp() {
   git push -u origin "$(branch)"
 }
