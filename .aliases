@@ -3,5 +3,9 @@ alias 'k'='kubectl'
 alias 'cat'='bat'
 alias 'firefox'='/Applications/Firefox.app/Contents/MacOS/firefox-bin -P'
 alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias gco='git checkout'
+alias gcm='git commit -m'
+alias giu='git add -u'
+alias gia='git add'
 
 [[ ! -f ~/.aliases_local ]] || source ~/.aliases_local
