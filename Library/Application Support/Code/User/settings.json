@@ -1,0 +1,120 @@
+{
+    "workbench.iconTheme": "material-icon-theme",
+    "files.autoSave": "afterDelay",
+    "editor.wordWrap": "on",
+    "vsicons.dontShowNewVersionMessage": true,
+    "solargraph.diagnostics": true,
+    "workbench.editor.showTabs": false,
+    "editor.minimap.enabled": false,
+    "workbench.activityBar.visible": false,
+    "editor.renderWhitespace": "none",
+    "explorer.openEditors.visible": 0,
+    "workbench.editor.enablePreview": false,
+    "workbench.editor.enablePreviewFromQuickOpen": false,
+    "terminal.external.osxExec": "iTerm.app",
+    "terminal.integrated.fontFamily": "Hack Nerd Font",
+    "terminal.integrated.fontSize": 11,
+    "terminal.integrated.scrollback": 5000,
+    "workbench.colorCustomizations": {
+        "terminal.background": "#37364a",
+        "terminal.foreground": "#d0d2d1",
+        "terminalCursor.background": "#27292c",
+        "terminalCursor.foreground": "#d0d2d1",
+        "terminal.ansiBlack": "#003541",
+        "terminal.ansiBlue": "#93b2ca",
+        "terminal.ansiBrightBlack": "#666666",
+        "terminal.ansiBrightBlue": "#93b2ca",
+        "terminal.ansiBrightCyan": "#9ac9c4",
+        "terminal.ansiBrightGreen": "#c2c77b",
+        "terminal.ansiBrightMagenta": "#c0a7c7",
+        "terminal.ansiBrightRed": "#d77c79",
+        "terminal.ansiBrightWhite": "#ffffff",
+        "terminal.ansiBrightYellow": "#f4cf87",
+        "terminal.ansiCyan": "#9ac9c4",
+        "terminal.ansiGreen": "#89cd7e",
+        "terminal.ansiMagenta": "#c0a7c7",
+        "terminal.ansiRed": "#d77c79",
+        "terminal.ansiWhite": "#ffffff",
+        "terminal.ansiYellow": "#f4cf86"
+    },
+    "solargraph.useBundler": true,
+    "[ruby]": {
+        "editor.defaultFormatter": "mbessey.vscode-rufo",
+        "editor.tabSize": 2
+    },
+    "[rust]": {
+        "editor.defaultFormatter": "rust-lang.rust"
+    },
+    "editor.formatOnPaste": true,
+    "editor.formatOnType": true,
+    "ruby.rubocop.useBundler": true,
+    "editor.fontSize": 11,
+    "editor.fontLigatures": true,
+    "editor.folding": false,
+    "editor.glyphMargin": false,
+    "solargraph.checkGemVersion": false,
+    "ruby.useLanguageServer": true,
+    "workbench.colorTheme": "Material Theme Palenight",
+    "markdown.extension.preview.autoShowPreviewToSide": true,
+    "markdown.extension.toc.githubCompatibility": true,
+    "editor.wrappingIndent": "indent",
+    "files.trimFinalNewlines": true,
+    "rust-client.enableMultiProjectSetup": true,
+    "rust-client.updateOnStartup": true,
+    "rust.all_features": true,
+    "rust.clippy_preference": "on",
+    "terraform.indexing": {
+        "enabled": false,
+        "liveIndexing": false
+    },
+    "terraform.languageServer": {
+        "external": true,
+        "args": [
+            "serve"
+        ]
+    },
+    "go.useLanguageServer": true,
+    "[go]": {
+        "editor.codeActionsOnSaveTimeout": 750,
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true,
+        },
+        // Optional: Disable snippets, as they conflict with completion ranking.
+        "editor.snippetSuggestions": "none",
+    },
+    "[go.mod]": {
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true,
+        },
+    },
+    "gopls": {
+        // Add parameter placeholders when completing a function.
+        "usePlaceholders": true,
+        // If true, enable additional analyses with staticcheck.
+        // Warning: This will significantly increase memory usage.
+        "staticcheck": true,
+    },
+    "go.autocompleteUnimportedPackages": true,
+    "go.delveConfig": {
+
+        "dlvLoadConfig": {
+            "followPointers": true,
+            "maxVariableRecurse": 1,
+            "maxStringLen": 64,
+            "maxArrayValues": 64,
+            "maxStructFields": -1
+        },
+        "apiVersion": 2,
+        "showGlobalVariables": true
+    },
+    "editor.formatOnSave": true,
+    "search.mode": "reuseEditor",
+    "vs-kubernetes": {
+        "vs-kubernetes.helm-path.mac": "/Users/guillermogaston/.vs-kubernetes/tools/helm/darwin-amd64/helm",
+        "vs-kubernetes.kubectl-path.mac": "/Users/guillermogaston/.vs-kubernetes/tools/kubectl/kubectl",
+        "vs-kubernetes.minikube-path.mac": "/Users/guillermogaston/.vs-kubernetes/tools/minikube/darwin-amd64/minikube",
+        "vscode-kubernetes.minikube-path.mac": "/Users/guillermogaston/.vs-kubernetes/tools/minikube/darwin-amd64/minikube"
+    },
+}
