@@ -2,8 +2,6 @@ if [[ "$ZPROF" = true ]]; then
   zmodload zsh/zprof
 fi
 
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
 export HISTFILE="$HOME/.zhistory"
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
