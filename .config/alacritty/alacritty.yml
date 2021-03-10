@@ -901,7 +901,7 @@ shell:
   program: /usr/local/bin/zsh
   args:
     - -c
-    - 'source ~/.tmuxinit_fn; eval "$functions[tmuxinit]"'
+    - 'source ~/.tmuxinit_fn.sh ; eval "$functions[tmuxinit]"'
 
 #-----------------------
 # Key bindings
