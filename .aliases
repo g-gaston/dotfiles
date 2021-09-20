@@ -7,5 +7,6 @@ alias gco='git checkout'
 alias gcm='git commit -m'
 alias giu='git add -u'
 alias gia='git add'
+alias untar='tar -xvf'
 
 [[ ! -f ~/.aliases_local ]] || source ~/.aliases_local
