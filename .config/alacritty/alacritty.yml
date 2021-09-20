@@ -929,3 +929,7 @@ key_bindings:
   - { key: Down, mods: Command|Alt, chars: "\x02\x1b\x5b\x42" } # tmux down pane
   - { key: Left, mods: Command|Alt|Shift, chars: "\x02\x70" } # tmux previous tab
   - { key: Right, mods: Command|Alt|Shift, chars: "\x02\x6e" } # tmux next tab
+  - { key: Space, mods: Control, chars: "\x02" } # tmux prefix
+  - { key: F, mods: Command, chars: "\x02\x5bk/" } # tmux search down
+  - { key: F, mods: Command|Shift, chars: "\x02\x5b\x3f" } # tmux search up
+
