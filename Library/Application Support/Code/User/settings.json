@@ -1,7 +1,7 @@
 {
     "workbench.iconTheme": "material-icon-theme",
     "files.autoSave": "afterDelay",
-    "editor.wordWrap": "on",
+    "editor.wordWrap": "off",
     "vsicons.dontShowNewVersionMessage": true,
     "solargraph.diagnostics": true,
     "workbench.editor.showTabs": false,
@@ -11,9 +11,8 @@
     "explorer.openEditors.visible": 0,
     "workbench.editor.enablePreview": false,
     "workbench.editor.enablePreviewFromQuickOpen": false,
-    "terminal.external.osxExec": "iTerm.app",
-    "terminal.integrated.fontFamily": "Hack Nerd Font",
-    "terminal.integrated.fontSize": 11,
+    "terminal.external.osxExec": "Alacritty.app",
+    "terminal.integrated.fontFamily": "MesloLGS NF",
     "terminal.integrated.scrollback": 5000,
     "workbench.colorCustomizations": {
         "terminal.background": "#37364a",
@@ -35,11 +34,41 @@
         "terminal.ansiMagenta": "#c0a7c7",
         "terminal.ansiRed": "#d77c79",
         "terminal.ansiWhite": "#ffffff",
-        "terminal.ansiYellow": "#f4cf86"
+        "terminal.ansiYellow": "#f4cf86",
+        "list.focusHighlightForeground": "#f1f9fa",
+        "quickInputList.focusForeground": "#f1f9fa",
+        "editorSuggestWidget.selectedForeground": "#f1f9fa",
+        "list.focusHighlightBackground": "#47737d",
+        "quickInputList.focusBackground": "#47737d",
+        "editorSuggestWidget.selectedBackground": "#47737d",
     },
+    "workbench.colorTheme": "Nord",
+    "editor.semanticTokenColorCustomizations": {
+        "[Nord]": {
+            "rules": {
+                "variable": "#d8dee9",
+                "variable.definition": "#d8dee9",
+                "variable.readonly": "#d08770",
+                "namespace": "#8fbcbb",
+                "type": "#81a1c1",
+                "function": "#88c0d0",
+                "operator": "#8fbcbb",
+                "keyword": "#5e81ac"
+                // "namespace.definition": "#eceff4",
+            }
+        }
+    },
+    // This colors are good for the Nord theme
+    "bracket-pair-colorizer-2.colors": [
+        "#eceff4",
+        "#ebcb8b",
+        "#b48ead",
+        "#a3be8c",
+        "#d08770"
+    ],
     "solargraph.useBundler": true,
     "[ruby]": {
-        "editor.defaultFormatter": "mbessey.vscode-rufo",
+        "editor.defaultFormatter": "rebornix.ruby",
         "editor.tabSize": 2
     },
     "[rust]": {
@@ -54,7 +83,6 @@
     "editor.glyphMargin": false,
     "solargraph.checkGemVersion": false,
     "ruby.useLanguageServer": true,
-    "workbench.colorTheme": "Material Theme Palenight",
     "markdown.extension.preview.autoShowPreviewToSide": true,
     "markdown.extension.toc.githubCompatibility": true,
     "editor.wrappingIndent": "indent",
@@ -73,7 +101,7 @@
             "serve"
         ]
     },
-    "go.useLanguageServer": true,
+    "go.buildOnSave": "workspace",
     "[go]": {
         "editor.codeActionsOnSaveTimeout": 750,
         "editor.formatOnSave": true,
@@ -81,7 +109,11 @@
             "source.organizeImports": true,
         },
         // Optional: Disable snippets, as they conflict with completion ranking.
-        "editor.snippetSuggestions": "none",
+        //"editor.snippetSuggestions": "none",
+    },
+    "go.addTags": {
+        "options": "",
+        "transform": "camelcase"
     },
     "[go.mod]": {
         "editor.formatOnSave": true,
@@ -91,14 +123,24 @@
     },
     "gopls": {
         // Add parameter placeholders when completing a function.
-        "usePlaceholders": true,
+        "ui.completion.usePlaceholders": true,
         // If true, enable additional analyses with staticcheck.
         // Warning: This will significantly increase memory usage.
-        "staticcheck": true,
+        "ui.diagnostic.staticcheck": true,
+        // better syntax highlight
+        "ui.semanticTokens": true,
+        // run gofumpt (more strict than gofmt)
+        "formatting.gofumpt": true,
+        "formatting.local": "github.com/aws/modelrocket-cli",
+        "ui.diagnostic.analyses": {
+            // "fieldalignment": true,
+            "nilness": true,
+            "shadow": true,
+            "unusedwrite": true
+        }
     },
     "go.autocompleteUnimportedPackages": true,
     "go.delveConfig": {
-
         "dlvLoadConfig": {
             "followPointers": true,
             "maxVariableRecurse": 1,
@@ -117,4 +159,62 @@
         "vs-kubernetes.minikube-path.mac": "/Users/guillermogaston/.vs-kubernetes/tools/minikube/darwin-amd64/minikube",
         "vscode-kubernetes.minikube-path.mac": "/Users/guillermogaston/.vs-kubernetes/tools/minikube/darwin-amd64/minikube"
     },
+    "telemetry.enableCrashReporter": false,
+    "telemetry.enableTelemetry": false,
+    "code-runner.enableAppInsights": false,
+    "terminal.integrated.fontSize": 11,
+    "launch": {
+
+
+    
+        "configurations": [],
+        "compounds": []
+    },
+    "window.titleBarStyle": "custom",
+    "editor.fontFamily": "'MesloLGS NF', Menlo, Monaco, 'Courier New', monospace",
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter.notebook.ipynb"
+    },
+    "bashIde.highlightParsingErrors": true,
+    "go.lintTool": "golangci-lint",
+    "go.lintFlags": [
+        "--fast"
+    ],
+    "go.useCodeSnippetsOnFunctionSuggest": true,
+    "go.toolsManagement.autoUpdate": true,
+    "python.showStartPage": false,
+    "[json]": {
+    
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "editor.cursorStyle": "line",
+    "editor.insertSpaces": false,
+    "editor.lineNumbers": "on",
+    "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": ["g", "i"],
+            "commands": ["editor.action.goToImplementation"]
+        }
+    ],
+    "cSpell.userWords": [
+        "Customizer",
+        "Distro",
+        "EKSA",
+        "Gomega",
+        "Kube",
+        "Kubectl",
+        "Kustomize",
+        "OIDC",
+        "Wrapf",
+        "eksd",
+        "kubernetes",
+        "retrier",
+        "semver",
+        "vsphere"
+    ],
+    "redhat.telemetry.enabled": false,
+    "[typescript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    }
 }
