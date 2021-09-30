@@ -7,6 +7,16 @@ alias gco='git checkout'
 alias gcm='git commit -m'
 alias giu='git add -u'
 alias gia='git add'
+alias gs='git stash'
+alias gsp='git stash pop'
+
 alias untar='tar -xvf'
+alias c='clear'
+alias m='make'
+
+alias tree='tree -C'
+
+alias go-contributions='git ls-files | grep -E "^(.*\.go)$" | xargs -n1 git blame --line-porcelain | sed -n "s/^author //p" | sort -f | uniq -ic | sort -nr'
+
 
 [[ ! -f ~/.aliases_local ]] || source ~/.aliases_local
