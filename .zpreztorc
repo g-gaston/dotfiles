@@ -8,6 +8,7 @@ zstyle ':prezto:module:git:alias' skip 'yes'
 # The order matters.
 zstyle ':prezto:load' pmodule \
   'environment' \
+  'tmux' \
   'command-not-found' \
   'terminal' \
   'history' \
@@ -48,3 +49,11 @@ zstyle ':prezto:module:syntax-highlighting' highlighters \
 
 # Auto set the tab and window titles.
 zstyle ':prezto:module:terminal' auto-title 'yes'
+
+# Tmux
+# Auto start a session when Zsh is launched in a SSH connection.
+zstyle ':prezto:module:tmux:auto-start' remote 'yes'
+
+# Set the default session name:
+zstyle ':prezto:module:tmux:session' name 'primary'
+
