@@ -3,8 +3,13 @@ profzsh() {
   ZPROF=true $shell -i -c exit
 }
 
+
+if type ls >/dev/null; then 
+  unalias ls 2>/dev/null
+fi
+
 ls() {
-    if [[ $# -ne 0 ]] ; then command ls $@; else tree -I ".DS_Store" -alL 1 ; fi
+    if [[ $# -ne 0 ]] ; then command ls $@ --color; else tree -C -I ".DS_Store" -alL 1 ; fi
 }
 
 his() {
@@ -67,12 +72,13 @@ gfp() {
 _reset_with_branch_keep_commits() {
   branch_for_reset=${1}
   commits_to_save=${2}
+  remote="${3:=origin}"
   last_commit=$(git rev-parse HEAD)
   oldest_commit_to_keep=$(git rev-parse HEAD~$((${commits_to_save}-1)))
   current_branch=$(branch)
   copy_branch="copy-of-${current_branch}"
   stash_messsage="Temporal stashing for reset_with_master_keep_commit at $(date '+%Y-%m-%d %H:%M:%S')"
-  git stash save --include-untracked $stash_messsage && git branch "${copy_branch}" && git fetch origin "${branch_for_reset}:${branch_for_reset}" && git reset --hard "${branch_for_reset}" && git cherry-pick "${oldest_commit_to_keep}"\^.."${last_commit}"
+  git stash save --include-untracked $stash_messsage && git branch "${copy_branch}" && git fetch "${remote}" "${branch_for_reset}:${branch_for_reset}" && git reset --hard "${branch_for_reset}" && git cherry-pick "${oldest_commit_to_keep}"\^.."${last_commit}"
 
   if [ $? -ne 0 ]; then
     echo "Something went wrong. You'll probably need to:"
@@ -94,6 +100,24 @@ _reset_with_branch_keep_commits() {
 
 rmk1() {
   _reset_with_branch_keep_commits master 1
+}
+
+pr() {
+  PR=$1
+  git fetch upstream refs/pull/${PR}/head:pr/${PR} && git checkout pr/${PR}
+}
+
+listpods() {
+  kubectl get pods --all-namespaces -o jsonpath="{..image}" "$@" | tr -s '[[:space:]]' '\n' | sort | uniq -c
+}
+
+pm() {
+  present_branch=$(branch)
+  if [ "$present_branch" = "main" ]; then
+    git pull upstream main
+  else
+    git fetch upstream main:main
+  fi
 }
 
 [[ ! -f ~/.functions_local ]] || source ~/.functions_local
