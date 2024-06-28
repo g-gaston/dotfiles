@@ -14,6 +14,8 @@ fi
 # Source Prezto.
 source "${ZDOTDIR:-$HOME}/.zprezto/runcoms/zshrc"
 
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
 source "${HOME}/.aliases"
 source "${HOME}/.functions"
 
@@ -25,3 +27,8 @@ source "${HOME}/.functions"
 if [[ "$ZPROF" = true ]]; then
   zprof
 fi
+
+export BAT_THEME=Nord
+
+[ -s "${HOME}/.g/env" ] && \. "${HOME}/.g/env"  # g shell setup
+

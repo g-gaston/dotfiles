@@ -1,14 +1,32 @@
+function () {
+  source <(kubectl completion zsh)
+
+  local k_bin='kubecolor'
+  alias 'kubectl'="$k_bin"
+  alias 'k'="$k_bin"
+  alias 'kk'="$k_bin --kubeconfig"
+
+  compdef $k_bin=kubectl
+}
+
+
 alias 'gst'='git status'
 alias 'k'='kubectl'
+alias 'kk'='kubectl --kubeconfig'
 alias 'cat'='bat'
 alias 'firefox'='/Applications/Firefox.app/Contents/MacOS/firefox-bin -P'
 alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias gco='git checkout'
+alias gc='git commit'
 alias gcm='git commit -m'
+alias gcn="git commit --amend --no-edit"
+alias gca="git commit --amend"
 alias giu='git add -u'
 alias gia='git add'
 alias gs='git stash'
 alias gsp='git stash pop'
+
+alias vim="nvim"
 
 alias untar='tar -xvf'
 alias c='clear'

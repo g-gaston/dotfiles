@@ -18,7 +18,12 @@ his() {
 
 killgrep() {
   grep_string=$1
-  ps aux | grep $grep_string | grep -v grep | awk '{print $2}' | xargs kill -9
+  sudo=$2
+  ps aux | grep $grep_string | grep -v grep | awk '{print $2}' | xargs $sudo kill -9
+}
+
+skillgrep() {
+  killgrep $1 sudo
 }
 
 branch() {
@@ -69,7 +74,9 @@ gfp() {
   git push -f -u origin $(branch)
 }
 
-_reset_with_branch_keep_commits() {
+_reset_with_branch_keep_commits() {(
+  set -e
+
   branch_for_reset=${1}
   commits_to_save=${2}
   remote="${3:=origin}"
@@ -96,7 +103,7 @@ _reset_with_branch_keep_commits() {
       #return to original state
       git stash pop
   fi
-}
+)}
 
 rmk1() {
   _reset_with_branch_keep_commits master 1
@@ -119,5 +126,29 @@ pm() {
     git fetch upstream main:main
   fi
 }
+
+untilfail() {
+  iteration=0
+  while "$@"; do let iteration+=1 ;echo "iteration $iteration"; done
+}
+
+4ever() {
+  while sleep 5
+  do
+    "$@"
+  done
+}
+
+setkubeconfig() {
+  export KUBECONFIG=$1
+}
+
+podinnode() {
+  NODE=$1 # Node name, kubectl get nodes to select one
+  HOST_NETWORK="${2:-false}" # Use host netowkr in pod or not. Default is false, pass true as the second argument to enable
+
+  kubectl run -it --rm --restart=Never busybox --image=alpine/curl --overrides='{"apiVersion": "v1", "spec": { "tolerations": [{"key": "node-role.kubernetes.io/master", "operator": "Equal", "value": "", "effect": "NoSchedule"}, {"key": "node-role.kubernetes.io/control-plane","operator": "Equal","value": "","effect": "NoSchedule"}],  "nodeSelector": { "kubernetes.io/hostname": "'$NODE'" }, "hostNetwork": '${HOST_NETWORK}', "dnsPolicy": "ClusterFirst" }}' sh
+}
+
 
 [[ ! -f ~/.functions_local ]] || source ~/.functions_local
